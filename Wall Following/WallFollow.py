@@ -11,11 +11,13 @@ import numpy as np
 import rospy
 from sensor_msgs.msg import Image, LaserScan
 from ackermann_msgs.msg import AckermannDriveStamped, AckermannDrive
+from nav_msgs.msg import Odometry
+from sensor_msgs.msg import Imu
 
 #PID CONTROL PARAMETERS
-kp = 1.5
-kd = 0.05
-ki = 0.25
+kp = -70
+kd = -30
+ki = 0
 servoOffset = 0.0
 prevError = 0.0 
 error = 0.0
@@ -25,7 +27,7 @@ integral = 0.0
 ANGLE_RANGE = 270 # UST-10LX has a 270 degrees scan angle
 DESIRED_DISTANCE_RIGHT = 0.9 # In meters
 DESIRED_DISTANCE_LEFT = 1 # Needs to be adjusted depending on the track's width
-VELOCITY = 2.00 # In m/s
+VELOCITY = 5.00 # In m/s
 CAR_LENGTH = 0.50
 
 class WallFollow:
@@ -33,9 +35,13 @@ class WallFollow:
         # Topics & Subs, Pubs
         lidarscan_topic = '/scan'
         drive_topic = '/drive'
-
+        self.f = open('data.csv','w')
+        self.odometry = None
+        self.imu = None
         self.lidar_sub = rospy.Subscriber("/scan", LaserScan, self.lidar_callback, queue_size = 1)
         self.drive_pub = rospy.Publisher("/drive", AckermannDriveStamped, queue_size = 1)
+        self.odom_subscriber = rospy.Subscriber("/odom", Odometry, self.odometry_callback)
+        self.imu_subscriber = rospy.Subscriber("/imu", Imu, self.imu_callback)
 
     def getRange(self, data, angle):
         # data: single message from topic /scan
@@ -63,8 +69,8 @@ class WallFollow:
         integral += error
         angle = np.radians(kp*error+kd*deriv_error+ki*integral)
         velocity = self.calcSpeed(angle)
-        rospy.loginfo("Error {}, Angle {}".format(error, np.degrees(angle)))
-
+        #rospy.loginfo("Error {}, Angle {}".format(error, np.degrees(angle)))
+        self.f.write('\n' + str(rospy.Time.now()) + ',' + str(np.degrees(angle)) + ',' + str(self.get_car_linear_velocity()) + ',' + str(self.get_car_linear_acceleration()))
         driveMsg = AckermannDriveStamped()
         driveMsg.header.stamp = rospy.Time.now()
         driveMsg.header.frame_id = "laser"
@@ -75,11 +81,11 @@ class WallFollow:
     def calcSpeed(self, angle):
         angle = np.abs(np.degrees(angle))
         if angle >= 0 and angle < 10:
-            speed = 1.5
+            speed = VELOCITY
         elif angle >= 10 and angle < 20:
-            speed = 1.0
+            speed = VELOCITY/2
         else:
-            speed = 0.5
+            speed = VELOCITY/4
         return speed
 
     def followLeft(self, data, leftDist):
@@ -104,6 +110,23 @@ class WallFollow:
         error = self.followLeft(data, DESIRED_DISTANCE_LEFT)
         if error is not None:
             self.pidControl(error)  # Send the error to pidControl
+
+    def odometry_callback(self, odometry):
+        self.odometry = odometry
+
+    def imu_callback(self, imu):
+        self.imu = imu
+
+    def get_car_linear_velocity(self):
+        if self.odometry is None or (self.odometry.twist.twist.linear.x == 0 and self.odometry.twist.twist.linear.x == 0):
+            return 0
+        return np.sqrt(self.odometry.twist.twist.linear.x ** 2 + self.odometry.twist.twist.linear.y ** 2)
+
+    def get_car_angular_acceleration(self):
+        return self.odometry.twist.twist.angular
+
+    def get_car_linear_acceleration(self):
+        return np.sqrt(self.imu.linear_acceleration.x ** 2 + self.imu.linear_acceleration.y ** 2)
 
 def main(args):
     rospy.init_node("WallFollow_node", anonymous=True)
