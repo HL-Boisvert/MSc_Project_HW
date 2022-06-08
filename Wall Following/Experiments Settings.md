@@ -10,16 +10,16 @@ I ended up with a system that has only 2 oscillations and a very quick response 
 
 # Settings
 ## WallFollow.py
-kp = -70
-kd = -30
-ki = -0,07
+kp = -70  
+kd = -30  
+ki = -0,07  
 
-ANGLE_RANGE = 270° (from UST-10LX Specifications)
-DESIRED_DISTANCE_RIGHT = 0,9m
-DESIRED_DISTANCE_LEFT = 1m
-VELOCITY = 5.00m/s (reduced from the max speed of 20 m/s given by the simulator for safety reasons)
-MAX_ACCEL = 12m/s^2
-MAX_DECEL = 8,26m/s^2
-CAR_LENGTH = 0,35m
+ANGLE_RANGE = 270° (from UST-10LX Specifications)  
+DESIRED_DISTANCE_RIGHT = 0,9m  
+DESIRED_DISTANCE_LEFT = 1m  
+VELOCITY = 5.00m/s (reduced from the max speed of 20 m/s given by the simulator for safety reasons)  
+MAX_ACCEL = 12m/s^2  
+MAX_DECEL = 8,26m/s^2  
+CAR_LENGTH = 0,35m  
 
-theta = 35°
+theta = 35°  
