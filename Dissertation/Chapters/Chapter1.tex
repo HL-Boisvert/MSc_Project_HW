@@ -1,0 +1,46 @@
+% Chapter 1
+
+\chapter{Introduction} % Main chapter title
+
+\label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+\lhead{Chapter 1. \emph{Introduction}}
+
+%----------------------------------------------------------------------------------------
+
+\section{Motivation and research questions}
+\label{researchquestions}
+
+For the last decade, the driving industry has seen steady progress in implementing autonomous-vehicle technology, with companies such as Tesla, Waymo, Ford, Baidu and Apple aiming to develop self-driving vehicles for consumers. With that would come significant benefits: improved personal safety, reduced environmental impact, decreased transportation costs, and time-saving. It is estimated that by 2030 a considerable number of driverless vehicles will be travelling on the roads, even though the industry faces significant technological, legal and ethical challenges (\cite{Barab_s_2017}). Autonomous driving systems rely on sensors to acquire data about their environment, for example, the position of other vehicles or pedestrians. Some of the companies working on self-driving technology have been relying on Light Detection and Ranging (LiDAR) sensors, which use laser beams to map the 3D environment of the vehicle by measuring the difference between the generated and reflected laser beam; the LiDAR then outputs a 3D point cloud corresponding to the scanned environment (\cite{lidar}).
+	\newline
+The Machine Learning (ML) field has recently gained a lot of interest for several reasons, notably theoretical developments such as Deep Neural Networks (NNs) and Reinforcement Learning (RL), as well as the increasing availability of large datasets and parallel computing hardware (\cite{smart}). RL is an area of machine learning concerned with problems in which an intelligent agent is evolving in its environment while analysing the consequences of its actions thanks to the reward given by the environment. RL problems can be formulated as Markov Decision Processes (MDPs) if the environment is fully observable or as partially observable MDPs if the agent only has access to a subset of states, as it would be for an autonomous vehicle. The agent's goal is then to find the optimal policy of the MDP, which maximises the expected cumulative reward. Despite its perceived usefulness and growing popularity, Reinforcement Learning has not been successfully applied to commercial autonomous driving, even though several approaches have been developed like in \cite{Reference2} and \cite{Reference3}. The field of RL has dramatically evolved since \cite{watkins1989}, with the new approach of deep reinforcement learning combining classic reinforcement algorithms with convolutional neural networks, which looks very promising for autonomous driving applications (\cite{Reference4}).
+	\newline
+The F1TENTH Autonomous Vehicle System is a modular open-source platform designed by an international community of researchers in 2016 at the University of Pennsylvania for autonomous systems research and education (\cite{okelly2019}). This standardised 1/10 scale autonomous racing car can be equipped with different sensors and performs intensive computations online using a GPGPU Computer platform. It features realistic dynamics and hardware/software capabilities similar to a full-scale platform. The software architecture is based on the Robot Operating System (ROS), a set of software libraries used to build robot applications. The architecture is divided into the perception, planning and control modules, making the F1TENTH  platform modular enough to be used for research in fields such as communication systems, robotics, autonomous driving and reinforcement learning. Furthermore, the platform provides a simulator able to run the same code as the car itself, which enables the user to develop a controller in a safe and controlled environment to avoid damaging the car. However, this could be problematic if the controller is incapable of accounting for the sensor noise and the actuators' lack of precision which is unavoidable in the real setup.
+	\newline
+Over the past decades, many RL controllers have been successfully introduced in the autonomous racing field, for example, by \cite{sim2real} and \cite{granturismo}, so much that, in our opinion, it has become complicated to choose which method to use, with a trade-off between performance and complexity. In our opinion, comparing the efficiency of some of the most popular autonomous racing controllers would be interesting. In this dissertation, we will thus evaluate the efficiency of Deep RL methods over RL controllers, Model Predictive Control (MPC) and human control of an F1Tenth platform using data from the onboard LiDAR. We will first implement basic RL algorithms like Q-Learning, and then move on to more advanced controllers. We thus propose the two following research questions:
+\newline
+\textbf{Research question 1:} Does Deep Reinforcement Learning provide a real advantage for controlling an autonomous racing car over less sophisticated methods like MPC, according to the selected metrics?
+\newline
+\textbf{Research question 2:} Are Reinforcement Learning controllers robust enough to overcome the simulation to real-life gap? We define robustness as the ability to perform well (according to our metrics) even though the simulated environment may differ from real life.
+\section{Aims and Objectives}
+\label{metricssection}
+
+This dissertation will compare the viability of different reinforcement learning approaches to develop an autonomous racing controller for an F1Tenth car. We will determine if DRL shows a real improvement over simpler algorithms, like the Wall Following method, which uses LiDAR data and a PID controller to steer the car. In the literature, DRL controllers have been shown to achieve super-human capabilities in the racing game Gran Turismo (\cite{granturismo}), and controllers based on the Deep Deterministic Policy Gradient (DDPG) and Twin Delayed DDPG (TD3) algorithms were successfully implemented on the F1Tenth platform (\cite{Reference4}). The controller applies a control action during training and looks at the reward received. As the training continues, the algorithm would try to maximise the reward by looking at the state space and experimenting with different control outputs. The Neural Network would take the raw LiDAR measurements as input and output the steering for the F1Tenth car. This general goal can be subdivided into smaller objectives:
+
+\begin{itemize}
+\item \textbf{Objective 1:} Define an appropriate reward function which incentivises safe, smooth and fast control of the F1Tenth car for Reinforcement Learning algorithms.
+\item \textbf{Objective 2:} Implement several controllers using different algorithms and Neural Networks (NNs) architectures. In the case of Deep Reinforcement Learning algorithms, the NNs are used to approximate the optimal policy of the racing car, as will be explained in \ref{Chapter2}.
+\item \textbf{Objective 3:} Train the controllers in the simulation using different methods, starting with Deep Q-Learning and then moving to a Deep Deterministic Policy Gradient (DDPG) to approximate the Q function using a Bellman equation; test the controllers on different race tracks.
+\item \textbf{Objective 4:} Use the NN controllers trained in the simulator on the real car and observe the gap between the simulation and the real world; control the car manually with the joystick.
+\item \textbf{Objective 5:} Conclude on the viability of the different algorithms and the superiority (or not) of DRL methods.
+\end{itemize}
+
+The metrics used for evaluating the performance of each controller on several racing tracks will be introduced in \ref{eva}. \\
+
+The different racing tracks will be chosen to evaluate the performance of the controller to generalise to other situations; they can be found in Appendix \ref{AppendixA}.
+
+
+\subsection*{Results and Project Scope}
+This project's main contribution is to offer a better understanding of the capabilities and limitations of different RL algorithms for autonomous racing, especially regarding the gap between the simulation and the real world. Before this project, many RL methods have already been used for autonomous racing; however, the Sim-to-Real gap is often not quantified in detail. We will limit ourselves to comparing only a few algorithms, and available computational capabilities will limit training time. Furthermore, we will restrict our data acquisition to LiDAR, won't use any sensor fusion and will assume the LiDAR data is perfectly accurate. \newline
+Extrapolation of our results to more state-of-the-art racing platforms and algorithms will be left for future work.
+\newpage
