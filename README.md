@@ -5,7 +5,7 @@
 [[Evaluation on the physical car videos and trained DQN controllers](https://bit.ly/3whXsn5)]
 
 
-<img src="Images/IMG_3685.JPG" alt="car top" width="480"/>
+<img src="Images/IMG_3685.JPG" alt="car top" width="350"/>
 
 
 
