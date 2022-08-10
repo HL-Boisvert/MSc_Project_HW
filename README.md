@@ -4,7 +4,7 @@
 [[Dissertation](https://github.com/HL-Boisvert/MSc_Project_HW/blob/main/Dissertation/main.pdf)]
 [[Videos of the evaluation of the DQN controllers on the physical car](https://bit.ly/3whXsn5)]
 
-<img src="Images/car.jpg" alt="car top" width="400"/>
+<img src="Images/car.jpg" alt="car top" width="450"/>
 
 - The simulator is from https://github.com/f1tenth/f1tenth_simulator  
 - The Wall Following controller is based on the code from the official F1Tenth lab n°3 at https://github.com/f1tenth/f1tenth_labs/tree/main/lab3  
