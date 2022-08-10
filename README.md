@@ -2,41 +2,22 @@
 # Evaluating the Performance of Diﬀerent Reinforcement Learning Methods for Autonomous Racing
 
 [[Dissertation](https://github.com/HL-Boisvert/MSc_Project_HW/blob/main/Dissertation/main.pdf)]
-[[Evaluation on the physical car videos and trained DQN controllers](https://bit.ly/3whXsn5)]
+[[Videos of the evaluation of the DQN controllers on the physical car](https://bit.ly/3whXsn5)]
 
 
 <img src="Images/car.jpg" alt="car top" width="350"/>
 
-
-
-Implementation of *DQN* for autonomous racing using *lidar* data
-
-It is designed to running on [f1tenth cars](https://f1tenth.org/)
-
-*ROS* is used to control the car motor, servo and acquire the lidar data
-
-*It can be used on both the real f1tenth car and on its simulator*
+The simulator is from https://github.com/f1tenth/f1tenth_simulator  
+The wall following controller is based on the code from the official F1Tenth lab n°3 at https://github.com/f1tenth/f1tenth_labs/tree/main/lab3  
+The DQN controller is based on https://github.com/MichaelBosello/f1tenth-RL
+The code is designed to run on [f1tenth cars](https://f1tenth.org/), both on the real car and the simulator.
 
 The DQN implementation provides several techniques to improve performances like target network, replay buffer, state history, prioritized sampling. It has various parameters (see below) that one can modify to fit the specific environment. There are also various options to pre-process lidar data. One can use lidar data directly or represent them as images containing the environment borders. Velocity can be added to to the state
 
-Model saving, replay buffer serialization, and tensorboard logging are provided 
-
-## Paper
-
-If you use this repo, please cite our paper [[DOI](https://doi.org/10.1109/CCNC49033.2022.9700730)].
-
-```
-@INPROCEEDINGS{9700730,
-  author={Bosello, Michael and Tse, Rita and Pau, Giovanni},
-  booktitle={2022 IEEE 19th Annual Consumer Communications   Networking Conference (CCNC)}, 
-  title={Train in Austria, Race in Montecarlo: Generalized RL for Cross-Track F1<sup>tenth</sup> LIDAR-Based Races}, 
-  year={2022},
-  pages={290-298},
-  doi={10.1109/CCNC49033.2022.9700730}}
-```
 
 ## Introduction
-_Abstract_ &mdash; Autonomous vehicles have received great attention in the last years, promising to impact a market worth billions. Nevertheless, the dream of fully autonomous cars has been delayed with current self-driving systems relying on complex processes coupled with supervised learning techniques. The deep reinforcement learning approach gives us newer possibilities to solve complex control tasks like the ones required by autonomous vehicles. It let the agent learn by interacting with the environment and from its mistakes. Unfortunately, RL is mainly applied in simulated environments, and transferring learning from simulations to the real world is a hard problem. In this paper, we use LIDAR data as input of a Deep Q-Network on a realistic 1/10 scale car prototype capable of performing training in real-time. The robot-driver learns how to run in race tracks by exploiting the experience gained through a mechanism of rewards that allow the agent to learn without human supervision. We provide a comparison of neural networks to find the best one for LIDAR data processing, two approaches to address the sim2real problem, and a detail of the performances of DQN in time-lap tasks for racing robots.
+_Abstract_ &mdash; The increasing popularity of Reinforcement Learning over the last decade has transformed the AI field. One area that has benefited from this so-called deep learning revolution is autonomous driving and more specifically autonomous racing. Many Reinforcement Learning based controllers have been implemented with varying levels of success, to such an extent that it has become a challenge to find the method with the right compromise between performance and complexity of implementation. Furthermore, most implementations of Reinforcement Learning controllers for autonomous racing are trained in a simulated environment and assume that the Sim2Real gap won't have too much of an impact on performance: this is something that can have a considerable impact on the choice of a specific method for real-life applications.  
+This project will have a double aim. Firstly, it will be to compare the performance of different autonomous racing controllers and their ability to generalise to new data to help users choose one that corresponds to their needs. Secondly, it will be to compare the Sim2Real gaps to give users an idea of performance in real-life situations; this will be achieved by using the F1Tenth platform. This research report details my review of the relevant literature and establishes research questions, hypotheses, objectives, and a well-defined experimental protocol.
 
 ## Experiments
 
