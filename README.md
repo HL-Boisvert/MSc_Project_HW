@@ -7,11 +7,12 @@
 <img src="Images/car.jpg" alt="car top" width="350"/>
 
 - The simulator is from https://github.com/f1tenth/f1tenth_simulator  
-- The wall following controller is based on the code from the official F1Tenth lab n°3 at https://github.com/f1tenth/f1tenth_labs/tree/main/lab3  
+- The Wall Following controller is based on the code from the official F1Tenth lab n°3 at https://github.com/f1tenth/f1tenth_labs/tree/main/lab3  
 - The DQN controller is based on https://github.com/MichaelBosello/f1tenth-RL  
 - The code is designed to run on [f1tenth cars](https://f1tenth.org/), both on the real car and the simulator.  
 
-The DQN implementation provides several techniques to improve performances like target network, replay buffer, state history, prioritized sampling. It has various parameters (see below) that one can modify to fit the specific environment. There are also various options to pre-process lidar data. One can use lidar data directly or represent them as images containing the environment borders. Velocity can be added to to the state
+The controllers implement several parameters both for the car (maximum speed, steering angle, acceleration...) and for the training process (learning rate, epsilon starting value and decay, size of the replay buffer...), to make the code as flexible as possible.  
+Logging in Tensorboard was already implemented in https://github.com/MichaelBosello/, and logging to csv format was added.
 
 ## Introduction
 _Abstract_ &mdash; The increasing popularity of Reinforcement Learning over the last decade has transformed the AI field. One area that has benefited from this so-called deep learning revolution is autonomous driving and more specifically autonomous racing. Many Reinforcement Learning based controllers have been implemented with varying levels of success, to such an extent that it has become a challenge to find the method with the right compromise between performance and complexity of implementation. Furthermore, most implementations of Reinforcement Learning controllers for autonomous racing are trained in a simulated environment and assume that the Sim2Real gap won't have too much of an impact on performance: this is something that can have a considerable impact on the choice of a specific method for real-life applications.  
@@ -21,7 +22,7 @@ This project will have a double aim. Firstly, it will be to compare the performa
 
 Several experiments have been performed (more details are available in the dissertation) to answer all experimental requirements:  
 
-- In-simulator comparison of DQN to Wall Following: compares the performance of DQN to Wall Following on training track using both CNNs and NNs. The performance is assessed by three different metrics: speed, safety and smoothness; three different reward functions were tested.  
+- In-simulator comparison of DQN to Wall Following: compares the performance of DQN to Wall Following on training track using both CNNs and NNs, with LiDAR data as input. The performance is assessed by three different metrics: speed, safety and smoothness; three different reward functions were tested.  
 - In-simulator comparison of DQN to assess whether DRL generalises well to new tracks: compares the performance of DQN controllers trained on track A and tested on track B to DQN controllers tested and trained on track B.  
 - Sim2real experiment to assess the Sim2Real gap: the DQN controllers are trained in the simulator and evaluated on the physical F1tenth car. Using the same metrics as before, the DQN controllers are compared to Wall Following and manual driving.  
 
