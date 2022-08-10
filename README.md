@@ -36,6 +36,7 @@ Tensorboard logging and trained models of experiments (of both real and simulate
 `$ sudo apt install rospkg catkin_pkg`  
 `$ sudo apt install ros-noetic-ackermann-msgs` or `ros-melodic-ackermann-msgs`  
 `$ sudo apt install tensorflow==2.0.0`  
+When on a machine with ARM architecture, a [pre-built Tensorflow binary](https://github.com/PINTO0309/Tensorflow-bin#usage) has to be installed instead.  
 
 
 ## DQN training  
