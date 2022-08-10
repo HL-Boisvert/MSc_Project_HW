@@ -38,6 +38,25 @@ Tensorboard logging and trained models of experiments (of both real and simulate
 `$ sudo apt install tensorflow==2.0.0`  
 
 
+## DQN training  
+DQN/rl_car_driver.py  
+
+`epsilon-decay = 0.99994`  
+
+DQN/car_control.py  
+
+`MAX_SPEED_REDUCTION_SIM = 1`  
+`STEERING_SPEED_REDUCTION_SIM = 1.4`  
+`BACKWARD_SPEED_REDUCTION_SIM = 4.5`  
+`BACKWARD_SECONDS = 1.5`  
+
+
+## Testing parameters for DQN
+gpu-time = 0.0001  
+train-epoch-steps = 0  
+max-step-limit = 1000000  
+save-model-freq = 100000  
+
 ## Run in simulator
 1. Launch the F1Tenth simulator:
 `$ cd catkin_ws`  
@@ -46,7 +65,7 @@ Tensorboard logging and trained models of experiments (of both real and simulate
 2. Launch the controller:
 `$ python3 rl_car_driver.py --simulator`
 
-#### Simulator options:
+### Simulator options:
 + The guide of the simulator is found in the readme *simulator/src/f1tenth_simulator/README/md*  
 
 + Many parameters can be changed in *simulator/src/f1tenth_simulator/params.yaml*  
@@ -59,25 +78,7 @@ Tensorboard logging and trained models of experiments (of both real and simulate
 
 `roslaunch racecar teleop.launch`  
 
-### Load a model
+## Load a model
  the argument --model can be used to load a trained model:
 
 `python3 rl_car_driver.py --model=./CNNRW3/models`
-
-## Testing parameters for DQN
-gpu-time = 0.0001  
-train-epoch-steps = 0  
-max-step-limit = 1000000  
-save-model-freq = 100000  
-
-# NNs training  
-DQN/rl_car_driver.py  
-
-`epsilon-decay = 0.99994`  
-
-DQN/car_control.py  
-
-`MAX_SPEED_REDUCTION_SIM = 1`  
-`STEERING_SPEED_REDUCTION_SIM = 1.4`  
-`BACKWARD_SPEED_REDUCTION_SIM = 4.5`  
-`BACKWARD_SECONDS = 1.5`  
