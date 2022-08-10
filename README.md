@@ -26,9 +26,6 @@ Several experiments have been performed (more details are available in the disse
 - In-simulator comparison of DQN to assess whether DRL generalises well to new tracks: compares the performance of DQN controllers trained on track A and tested on track B to DQN controllers tested and trained on track B.  
 - Sim2real experiment to assess the Sim2Real gap: the DQN controllers are trained in the simulator and evaluated on the physical F1tenth car. Using the same metrics as before, the DQN controllers are compared to Wall Following and manual driving.  
 
-Tensorboard logging and trained models of experiments (of both real and simulated car) are provided in the release section. Maps used in simulated experiments are available in the */map* directory. If you want to use these maps, you must edit *simulator.launch* (see below) or copy the one provided in */map*
-
-
 ## Installation
 
 1. Install ROS [Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu) or [Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu)  
