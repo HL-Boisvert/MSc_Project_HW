@@ -56,12 +56,12 @@ max-step-limit = 1000000
 save-model-freq = 100000  
 
 ## Run in simulator
-1. Launch the F1Tenth simulator:
+1. Launch the F1Tenth simulator:  
 `$ cd catkin_ws`  
-`$ source devel/setup.bash`
-`$ roslaunch f1tenth_simulator simulator.launch`
-2. Launch the controller:
-`$ python3 rl_car_driver.py --simulator`
+`$ source devel/setup.bash`  
+`$ roslaunch f1tenth_simulator simulator.launch`  
+2. Launch the controller:  
+`$ python3 rl_car_driver.py --simulator`  
 
 ### Simulator options:
 + The guide of the simulator is found in the readme *simulator/src/f1tenth_simulator/README/md*  
@@ -77,6 +77,5 @@ save-model-freq = 100000
 `roslaunch racecar teleop.launch`  
 
 ## Load a model
- the argument --model can be used to load a trained model:
-
+ the argument --model can be used to load a trained model:  
 `python3 rl_car_driver.py --model=./CNNRW3/models`
