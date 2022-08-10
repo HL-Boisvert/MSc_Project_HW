@@ -4,16 +4,14 @@
 [[Dissertation](https://github.com/HL-Boisvert/MSc_Project_HW/blob/main/Dissertation/main.pdf)]
 [[Videos of the evaluation of the DQN controllers on the physical car](https://bit.ly/3whXsn5)]
 
-
 <img src="Images/car.jpg" alt="car top" width="350"/>
 
-The simulator is from https://github.com/f1tenth/f1tenth_simulator  
-The wall following controller is based on the code from the official F1Tenth lab n°3 at https://github.com/f1tenth/f1tenth_labs/tree/main/lab3  
-The DQN controller is based on https://github.com/MichaelBosello/f1tenth-RL
-The code is designed to run on [f1tenth cars](https://f1tenth.org/), both on the real car and the simulator.
+- The simulator is from https://github.com/f1tenth/f1tenth_simulator  
+- The wall following controller is based on the code from the official F1Tenth lab n°3 at https://github.com/f1tenth/f1tenth_labs/tree/main/lab3  
+- The DQN controller is based on https://github.com/MichaelBosello/f1tenth-RL  
+- The code is designed to run on [f1tenth cars](https://f1tenth.org/), both on the real car and the simulator.  
 
 The DQN implementation provides several techniques to improve performances like target network, replay buffer, state history, prioritized sampling. It has various parameters (see below) that one can modify to fit the specific environment. There are also various options to pre-process lidar data. One can use lidar data directly or represent them as images containing the environment borders. Velocity can be added to to the state
-
 
 ## Introduction
 _Abstract_ &mdash; The increasing popularity of Reinforcement Learning over the last decade has transformed the AI field. One area that has benefited from this so-called deep learning revolution is autonomous driving and more specifically autonomous racing. Many Reinforcement Learning based controllers have been implemented with varying levels of success, to such an extent that it has become a challenge to find the method with the right compromise between performance and complexity of implementation. Furthermore, most implementations of Reinforcement Learning controllers for autonomous racing are trained in a simulated environment and assume that the Sim2Real gap won't have too much of an impact on performance: this is something that can have a considerable impact on the choice of a specific method for real-life applications.  
@@ -21,28 +19,14 @@ This project will have a double aim. Firstly, it will be to compare the performa
 
 ## Experiments
 
-Several experiments have been performed (more details are available in the dissertation) to answer all experimental requirements:
+Several experiments have been performed (more details are available in the dissertation) to answer all experimental requirements:  
 
-- NN comparison experiment: compares the performance of 1D CNN, 2D CNN, and fully-connected networks when used to detect LIDAR data
-+ Sim2real experiment, Training on the physical car: training the agent directly in the real world using real LIDAR data as input
-+ Sim2real experiment, Transfer learning: training the agent in the simulator and use the model in F1tenth car without any retraining thanks to our LIDAR pre-processing algorithm
-+ F1 racetracks experiment: demonstrates the race-performance, sample efficiency, and generalization capability of DQN through simulations in challenging F1 racetracks
+- In-simulator comparison of DQN to Wall Following: compares the performance of DQN to Wall Following on training track using both CNNs and NNs. The performance is assessed by three different metrics: speed, safety and smoothness; three different reward functions were tested.  
+- In-simulator comparison of DQN to assess whether DRL generalises well to new tracks: compares the performance of DQN controllers trained on track A and tested on track B to DQN controllers tested and trained on track B.  
+- Sim2real experiment to assess the Sim2Real gap: the DQN controllers are trained in the simulator and evaluated on the physical F1tenth car. Using the same metrics as before, the DQN controllers are compared to Wall Following and manual driving.  
 
 Tensorboard logging and trained models of experiments (of both real and simulated car) are provided in the release section. Maps used in simulated experiments are available in the */map* directory. If you want to use these maps, you must edit *simulator.launch* (see below) or copy the one provided in */map*
 
-F1 track maps came from [this](https://github.com/CPS-TUWien/racing_dreamer) GitHub repo. You can find more maps [here](https://github.com/f1tenth/f1tenth_racetracks)
-
-Sim2real experiments videos:
-
-+ Training on the physical car
-
-    A video showing the evolution of training and the evaluation of the real car in the sim2real experiment is available [here](https://youtu.be/ardg7-7Pevw)
-
-+ Transfer learning
-
-    Coming soon
-
-![Evaluation run](img/run.gif)
 
 ## Installation
 
@@ -189,15 +173,25 @@ The package *car* provides the interfaces to the car sensors (*sensors.py*) and 
 
 *logging.py* write (if enabled) to a CSV all the states, actions, and rewards of every step to build a dataset for offline use. 
 
+## Testing parameters for DQN
+gpu-time = 0.0001  
+train-epoch-steps = 0  
+max-step-limit = 1000000  
+save-model-freq = 100000  
+
+# NNs training  
+DQN/rl_car_driver.py  
+
+`epsilon-decay = 0.99994`  
+
+DQN/car_control.py  
+
+`MAX_SPEED_REDUCTION_SIM = 1`  
+`STEERING_SPEED_REDUCTION_SIM = 1.4`  
+`BACKWARD_SPEED_REDUCTION_SIM = 4.5`  
+`BACKWARD_SECONDS = 1.5`  
+
+
 ## Use on alternative cars/simulators
 
 One can still use the dqn algorithm in alternative driving environments. You only need to implement your interfaces to the car sensors and actuators. To do so, implement your version of the files in the directory */car*. You are also free to not use ROS at all.
-
-## Imitation Learning 
-
-At the beginning of the training, it could be useful to provide a demonstration of how to drive to the agent. You can help the agent by piloting the car using a joystick. The agent will learn through imitation learning by your demonstration, and then you can switch back to RL to refine and improve the behavior of the agent.
-
-To enable the use of imitation learning, set *--gamepad* to True.
-*The following instructions refer to our joystick, you need to check the corresponding buttons of your joystick and modify the file gamepad.py if needed. Check out the corresponding 'event.code' by pressing your joystick buttons and modify the strings accordingly*
-
-The agent starts in autonomous mode (RL). If you want to switch to manual control (i.e., imitation learning), press the button "A". Press it again to return to autonomous training (RL). Hold down "R2" to accelerate. Use the right analog stick to steer. "R2" works like a dead-man switch: if you release it, the car will stop and the agent will wait for your input.
