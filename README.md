@@ -21,9 +21,9 @@ This project will have a double aim. Firstly, it will be to compare the performa
 
 ## Experiments
 
-Three experiments have been performed (more details in the paper):
+Several experiments have been performed (more details are available in the dissertation) to answer all experimental requirements:
 
-+ NN comparison experiment: compares the performance of 1D CNN, 2D CNN, and fully-connected networks when used to detect LIDAR data
+- NN comparison experiment: compares the performance of 1D CNN, 2D CNN, and fully-connected networks when used to detect LIDAR data
 + Sim2real experiment, Training on the physical car: training the agent directly in the real world using real LIDAR data as input
 + Sim2real experiment, Transfer learning: training the agent in the simulator and use the model in F1tenth car without any retraining thanks to our LIDAR pre-processing algorithm
 + F1 racetracks experiment: demonstrates the race-performance, sample efficiency, and generalization capability of DQN through simulations in challenging F1 racetracks
