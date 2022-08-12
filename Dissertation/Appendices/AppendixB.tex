@@ -1,0 +1,47 @@
+% Appendix B
+
+\chapter{Professional, Legal, Ethical, and Social Issues} % Main appendix title
+
+\label{AppendixB} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix B. \emph{Appendix B}} % This is for the header on each page - perhaps a shortened title
+
+
+\section{Professional Issues}
+\label{proiss}
+This project will respect the British Computer Society (BSC) Code of Conduct. \newline
+The Python code associated with this project will be published on a public GitHub repository, as well as the \LaTeX code of this research report. The code will be precisely commented, and the parameters used to obtain results will be listed in detail. The goal is to have reproducible results and make it easy for other people to integrate this code into their own applications.
+\newline
+The progress of the project and the obstacles faced will be documented in the repository, with regular commits and maximum transparency. We will strive to follow best practices during the development of all the components of the codebase, trying to make the code as explicit and objective as possible. The PyStyleGuide (introduced in \cite{rossyntax}) will be followed when writing Python ROS code. Python code will follow the PEP 8 conventions (\cite{pysyntax}), valuing consistency and readability. A short summary of the PEP 8 recommendations is as follows:
+\begin{itemize}
+	\item \verb |package_name|
+	\item \verb |ClassName|
+	\item \verb |field_name|
+	\item \verb |method_name|
+	\item \verb |_private_something|
+	\item 4 spaces for indentation
+\end{itemize}
+
+Code from other sources, like open-source packages and libraries, will be credited and listed in the repository, independently of the license.
+\newline
+The final objective is to develop code easily reusable in other contexts, for example, to be embedded in systems other than the F1Tenth platform.
+\section{Legal Issues}
+\label{legiss}
+There is no intent to monetise this project; this is why it was decided to use the MIT License for the codebase. This license is very permissive, not only for open-source use but also for profit (businesses). Anyone will be able to use the code to develop third-party software. MIT License was chosen for two reasons:
+\begin{itemize}
+	\item The license is defined in a very straightforward way: it is easy to understand the terms and conditions
+	\item The license makes it easier to link code with free open source software and proprietary closed source software and is compatible with other licenses such as GPL
+\end{itemize}
+No dataset will be used in this project as we will generate our own data. The maps used for training and evaluating the controllers were taken from \cite{brunnbauer2022latent}, found at the following link: \url{https://github.com/CPS-TUWien/racing_dreamer/tree/main/docs/maps}.
+
+\section{Ethical Issues}
+\label{ethiss}
+No ethical issues are directly associated with this project; however, autonomous racing is part of the more general field of autonomous driving, which features several realistic problems presented in \cite{ethical}. Much of those issues are related to the concept of responsibility: when all occupants of the vehicle become passengers, who is responsible for their safety and the safety of other road users? Other ethical problems include over-reliance on automatic safety systems, hacks, and data privacy. 
+\subsection{Social Issues}
+\label{sociss}
+
+The ORBIT AREA 4P Framework (\cite{orbit}) is a tool to help researchers in Information and Communications Technologies (ICT) to work responsibly. The framework asks several questions about the research, divided into four categories (anticipating, reflecting, engaging and acting) and along four axes (the process, the product, the purpose and the people). Two questions are particularly relevant to this project:
+\begin{itemize}
+	\item \textbf{Is the planned research methodology acceptable?} The project does not cause any lab health \& safety issues to people. To ensure the safety of the F1Tenth car, a module will be implemented to the car package (see Subsection \ref{expreq}) to prevent collisions when possible. The supervisor accepted an ethical approval form, and the methodology was introduced in \ref{Chapter3}.
+	\item \textbf{What are the viewpoints of a wider group of stakeholders?} Being part of the LAIV at Heriot-Watt University, I was able to get feedback from a wider group of researchers and academics through a presentation on RL and weekly meetings with my supervisor, Luca Arnaboldi and other academics.
+\end{itemize}
