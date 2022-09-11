@@ -1,7 +1,7 @@
 # MSc_Project_HW
 # Evaluating the Performance of Diﬀerent Reinforcement Learning Methods for Autonomous Racing
 
-[[Dissertation](https://github.com/HL-Boisvert/MSc_Project_HW/blob/main/Dissertation/Evaluating the Performance of Different Reinforcement Learning Methods for Autonomous Racing.pdf)]
+[[Dissertation](https://github.com/HL-Boisvert/MSc_Project_HW/blob/main/Dissertation/Evaluating the Performance of Different Reinforcement Learning Methods for Autonomous Racing.pdf)]  
 [[Videos of the evaluation of the DQN controllers on the physical car](https://bit.ly/3whXsn5)]
 
 <img src="Images/car.jpg" alt="car top" width="450"/>
