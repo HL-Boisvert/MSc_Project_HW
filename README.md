@@ -1,4 +1,4 @@
-# MSc_Project_HW
+# MSc Dissertation
 # Evaluating the Performance of Diﬀerent Reinforcement Learning Methods for Autonomous Racing
 
 [[Dissertation](https://github.com/HL-Boisvert/MSc_Project_HW/blob/main/Dissertation/main.pdf)]
